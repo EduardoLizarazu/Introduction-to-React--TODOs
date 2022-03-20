@@ -9,18 +9,36 @@ import { AppUI } from "./AppUI";
 //   { text: "Fuck!", completed: false },
 // ];
 
-function App() {
-  const localStorageToDos = localStorage.getItem('TODOS_V1');
-  let parsedToDos;
-  // Ver si en mi local storage hay info
-  if (!localStorageToDos) {
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedToDos = [];
-  } else {
-    parsedToDos =JSON.parse(localStorageToDos);
-  }
 
-  const [toDos, setToDos] = React.useState(parsedToDos);
+function useLocalStorage(itemName, initialValue) {
+  const localStorageItem = localStorage.getItem(itemName);
+
+  let parsedItem;
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = initialValue;
+  } else {
+    parsedItem =JSON.parse(localStorageItem);
+  }
+  
+  const [item, setItem] = React.useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    const stringifiedItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, stringifiedItem);
+    setItem(newItem);
+  };
+
+  return [
+    item,
+    saveItem
+  ]
+}
+
+
+function App() {
+  const [toDos, saveToDos] = useLocalStorage('TODOS_V1', []);
+
   const [searchValue, setSearchValue] = React.useState('');
 
   const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
@@ -40,11 +58,7 @@ function App() {
   }
 
 
-  const saveToDos = (newToDos) => {
-    const stringifiedToDos = JSON.stringify(newToDos);
-    localStorage.setItem('TODOS_V1', stringifiedToDos);
-    setToDos(newToDos);
-  };
+  
 
   const completeToDo = (text) => {
     const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
