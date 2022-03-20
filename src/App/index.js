@@ -1,10 +1,5 @@
 import React from "react";
-import { TodoCounter } from "./TodoCounter";
-import { TodoItem } from "./TodoItem";
-import { CreateTodoButton } from "./CreateTodoButton";
-import { TodoList } from "./TodoList";
-import { TodoSearch } from "./TodoSearch";
-import './App.css';
+import { AppUI } from "./AppUI";
 // el identificador que tiene que ser diferente es el texto
 const defaultToDos = [
   { text: "cut onion", completed: false },
@@ -52,28 +47,15 @@ function App() {
   };
 
   return (
-    <React.Fragment>
-      <TodoCounter 
-        total={ totalToDos }
-        completed={ completedToDos }
-      />
-      <TodoSearch 
-        searchValue={ searchValue }
-        setSearchValue={ setSearchValue }
-      />
-      <TodoList>
-        { searchedToDos.map(toDo => (
-          <TodoItem 
-            key={toDo.text} 
-            text={toDo.text}
-            completed={toDo.completed} 
-            onComplete={ () => completeToDo(toDo.text)}
-            onDelete={ () => deleteToDo(toDo.text)}
-          />
-        )) }
-      </TodoList>
-      <CreateTodoButton />
-    </React.Fragment>
+    <AppUI 
+      totalToDos={ totalToDos }
+      completedToDos={ completedToDos }
+      searchValue={ searchValue }
+      setSearchValue={ setSearchValue }
+      searchedToDos={ searchedToDos }
+      completeToDo={ completeToDo }
+      deleteToDo={ deleteToDo }
+    />
   );
 }
 
