@@ -5,7 +5,7 @@ import { CreateTodoButton } from "./CreateTodoButton";
 import { TodoList } from "./TodoList";
 import { TodoSearch } from "./TodoSearch";
 import './App.css';
-
+// el identificador que tiene que ser diferente es el texto
 const defaultToDos = [
   { text: "cut onion", completed: false },
   { text: "Take course of intro to React", completed: false },
@@ -32,6 +32,25 @@ function App() {
     });
     console.log(searchedToDos);
   }
+
+  const completeToDo = (text) => {
+    const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
+
+    const newToDo = [...toDos];
+    newToDo[toDoIndex].completed = true;
+    // toDos[toDoIndex] = {
+    //   text: toDos[toDoIndex].text,
+    //   completed: true,
+    // }
+    setToDos(newToDo);
+  };
+  const deleteToDo = (text) => {
+    const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
+    const newToDo = [...toDos];
+    newToDo.splice(toDoIndex, 1);
+    setToDos(newToDo);
+  };
+
   return (
     <React.Fragment>
       <TodoCounter 
@@ -43,11 +62,13 @@ function App() {
         setSearchValue={ setSearchValue }
       />
       <TodoList>
-        { searchedToDos.map(todo => (
+        { searchedToDos.map(toDo => (
           <TodoItem 
-            key={todo.text} 
-            text={todo.text}
-            completed={todo.completed} 
+            key={toDo.text} 
+            text={toDo.text}
+            completed={toDo.completed} 
+            onComplete={ () => completeToDo(toDo.text)}
+            onDelete={ () => deleteToDo(toDo.text)}
           />
         )) }
       </TodoList>
