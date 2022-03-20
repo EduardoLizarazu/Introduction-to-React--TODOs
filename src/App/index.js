@@ -1,15 +1,26 @@
 import React from "react";
 import { AppUI } from "./AppUI";
+
 // el identificador que tiene que ser diferente es el texto
-const defaultToDos = [
-  { text: "cut onion", completed: false },
-  { text: "Take course of intro to React", completed: false },
-  { text: "Cry with the Crybaby", completed: true },
-  { text: "Fuck!", completed: false },
-]
+// const defaultToDos = [
+//   { text: "cut onion", completed: false },
+//   { text: "Take course of intro to React", completed: false },
+//   { text: "Cry with the Crybaby", completed: true },
+//   { text: "Fuck!", completed: false },
+// ];
 
 function App() {
-  const [toDos, setToDos] = React.useState(defaultToDos);
+  const localStorageToDos = localStorage.getItem('TODOS_V1');
+  let parsedToDos;
+  // Ver si en mi local storage hay info
+  if (!localStorageToDos) {
+    localStorage.setItem('TODOS_V1', JSON.stringify([]));
+    parsedToDos = [];
+  } else {
+    parsedToDos =JSON.parse(localStorageToDos);
+  }
+
+  const [toDos, setToDos] = React.useState(parsedToDos);
   const [searchValue, setSearchValue] = React.useState('');
 
   const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
@@ -28,23 +39,28 @@ function App() {
     console.log(searchedToDos);
   }
 
+
+  const saveToDos = (newToDos) => {
+    const stringifiedToDos = JSON.stringify(newToDos);
+    localStorage.setItem('TODOS_V1', stringifiedToDos);
+    setToDos(newToDos);
+  };
+
   const completeToDo = (text) => {
     const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
 
     const newToDo = [...toDos];
     newToDo[toDoIndex].completed = true;
-    // toDos[toDoIndex] = {
-    //   text: toDos[toDoIndex].text,
-    //   completed: true,
-    // }
-    setToDos(newToDo);
+    saveToDos(newToDo);
   };
+
   const deleteToDo = (text) => {
     const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
     const newToDo = [...toDos];
     newToDo.splice(toDoIndex, 1);
-    setToDos(newToDo);
+    saveToDos(newToDo);
   };
+
 
   return (
     <AppUI 
