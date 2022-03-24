@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocalStorage } from "./useLocalStorage.js";
+import { useLocalStorage } from "./useLocalStorage.jsx";
 const ToDoContext = React.createContext();
 
 function ToDoProvider(props) {
@@ -52,13 +52,6 @@ function ToDoProvider(props) {
         newToDo.splice(toDoIndex, 1);
         saveToDos(newToDo);
       };
-    
-      // console.log('Render (antes del use effect)');
-      // // Async
-      // React.useEffect(() => {
-      //   console.log('use effect');
-      // }, [totalToDos]);
-      // console.log('Render (despues del use effect)');
     
     return (
         <ToDoContext.Provider value={{
