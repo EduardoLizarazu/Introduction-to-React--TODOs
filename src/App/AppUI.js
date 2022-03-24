@@ -2,6 +2,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import { TodoCounter } from "../TodoCounter";
 import { TodoItem } from "../TodoItem";
+import { TodoForm } from "../TodoForm";
 import { CreateTodoButton } from "../CreateTodoButton";
 import { TodoList } from "../TodoList";
 import { TodoSearch } from "../TodoSearch";
@@ -14,7 +15,7 @@ function AppUI() {
         error,
         loading,
         searchedToDos,
-        completedToDos,
+        completeToDo,
         deleteToDo,
         openModal,
         setOpenModal,
@@ -34,7 +35,7 @@ function AppUI() {
                     key={toDo.text} 
                     text={toDo.text}
                     completed={toDo.completed} 
-                    onComplete={ () => completedToDos(toDo.text)}
+                    onComplete={ () => completeToDo(toDo.text)}
                     onDelete={ () => deleteToDo(toDo.text)}
                 />
                 )) }
@@ -42,14 +43,11 @@ function AppUI() {
             
             { !!openModal && (
                 <Modal>
-                    {/* se pregunta si existe */}
-                    <p>{ searchedToDos[0]?.text }</p>
-                    {/* <p>Funciona</p> */}
+                    <TodoForm />
                 </Modal>
             ) }
             
             <CreateTodoButton 
-                openModal={ openModal }
                 setOpenModal={ setOpenModal }
             />
         </React.Fragment>
