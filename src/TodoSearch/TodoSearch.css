@@ -1,24 +1,45 @@
 .TodoSearch {
-    background: #F9FBFC;
-    border-radius: 2px;
-    border: 2px solid #202329;
-    margin: 0 24px;
-    height: 64px;
-    width: calc(100% - 62px);
-    font-size: 24px;
-    text-align: center;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    color: #1E1E1F;
-    box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.25);
-  }
-  
-  .TodoSearch::placeholder {
-    color: #A5A5A5;
-    font-family: 'Montserrat';
-    font-weight: 400;
-  }
-  
-  .TodoSearch:focus {
-    outline-color: #61DAFA;
-  }
+  background: #F9FBFC;
+  border-radius: 2px;
+  border: 2px solid #202329;
+  margin: 0 24px;
+  height: 64px;
+  width: calc(100% - 62px);
+  font-size: 24px;
+  text-align: center;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  color: #1E1E1F;
+  box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.25);
+
+  --angle: 0deg;
+  border: 5px solid;
+  border-image: linear-gradient(var(--angle), #c9c9c9, #202329) 1;
+	animation: 10s rotate linear infinite;
+}
+
+@keyframes rotate {
+	to {
+		--angle: 360deg;
+	}
+}
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.TodoSearch::placeholder {
+  color: #A5A5A5;
+  font-family: 'Montserrat';
+  font-weight: 400;
+}
+
+.TodoSearch:focus {
+  /* outline-color: #61DAFA; */
+  outline: none;
+  --angle: 0deg;
+  border: 5px solid;
+  border-image: linear-gradient(var(--angle), #c9c9c9, #61DAFA) 1;
+	animation: 10s rotate linear infinite;
+}
+

@@ -11,6 +11,7 @@ import { Modal } from "../Modal";
 import { ToDosError } from "../TodosError";
 import { ToDosLoading } from "../TodosLoading";
 import { EmptyToDos } from "../EmptyTodos";
+import { TodoFilterButton } from "../TodosFilterButton";
 
 function AppUI() {
 
@@ -29,6 +30,8 @@ function AppUI() {
             <TodoCounter />
             <TodoSearch />
                 
+            <TodoFilterButton />
+
             <TodoList>
                 { error && <ToDosError error={error}/> }
                 { loading && <ToDosLoading /> }

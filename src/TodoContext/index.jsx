@@ -13,7 +13,11 @@ function ToDoProvider(props) {
       const [searchValue, setSearchValue] = React.useState('');
 
       const [openModal, setOpenModal] = React.useState(false);
-    
+      
+      const [completedFilter, setCompletedFilter] = React.useState("");
+
+      
+
       const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
       const totalToDos = toDos.length;
     
@@ -42,7 +46,7 @@ function ToDoProvider(props) {
       const completeToDo = (text) => {
         const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
         const newToDo = [...toDos];
-        newToDo[toDoIndex].completed = true;
+        newToDo[toDoIndex].completed = !newToDo[toDoIndex].completed;
         saveToDos(newToDo);
       };
     
