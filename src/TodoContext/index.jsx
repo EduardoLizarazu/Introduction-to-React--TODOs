@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "./useLocalStorage.jsx";
 const ToDoContext = React.createContext();
 
@@ -14,26 +14,31 @@ function ToDoProvider(props) {
 
       const [openModal, setOpenModal] = React.useState(false);
       
-      const [completedFilter, setCompletedFilter] = React.useState("");
-
+      const [toggleFilter, setToggleFilter] = React.useState(false);
       
-
       const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
       const totalToDos = toDos.length;
-    
-      let searchedToDos = [];
+      
+      let filterCompleted = toDos; 
+      const filterCompletedToDos = () => {
+        setToggleFilter(prevToggleFilter => !prevToggleFilter);
+      };
+      if (toggleFilter) {
+        filterCompleted = toDos.filter(item => !!item.completed)
+      }
+
+      let searchedToDos =[];
       // varificamos si los usuario escribieron algon en el input
       if (!searchValue.length >= 1) {
-        searchedToDos = toDos;
+        searchedToDos = filterCompleted;
       } else {
-        searchedToDos = toDos.filter(toDo =>{
+        searchedToDos = filterCompleted.filter(toDo =>{
           const toDoText = toDo.text.toLowerCase();
           const searchText = searchValue.toLowerCase();
           return toDoText.includes(searchText);
         });
       }
-    
-    
+      
       const addToDo = (text) => {
         const newToDo = [...toDos];
         newToDo.push({
@@ -71,6 +76,8 @@ function ToDoProvider(props) {
             deleteToDo,
             openModal,
             setOpenModal,
+
+            filterCompletedToDos,
         }}>
             { props.children }
         </ToDoContext.Provider>
