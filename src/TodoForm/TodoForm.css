@@ -1,3 +1,12 @@
+@keyframes start {
+  from {
+    transform: translateY(15px);
+    opacity: .3;
+  } to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 form {
   width: 90%;
   max-width: 300px;
@@ -6,6 +15,24 @@ form {
   display: flex;
   align-content: center;
   flex-direction: column;
+
+  animation-name: start;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+@keyframes end {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  } to {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+}
+.dispel {
+  animation-name: end;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
 }
 
 label {

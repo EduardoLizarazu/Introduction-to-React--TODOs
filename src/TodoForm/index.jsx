@@ -4,10 +4,12 @@ import './TodoForm.css';
 
 function TodoForm() {
     const [newToDoValue, setNewToDoValue] = React.useState('');
-
+    
+    const [dispel, setDispel] = React.useState(false);
     const {
         addToDo,
         setOpenModal,
+        openModal,
     } = React.useContext(ToDoContext);
 
     const onChange = (event) => {
@@ -15,16 +17,21 @@ function TodoForm() {
     };
 
     const onCancel = () => {
-        setOpenModal(false);
+        setDispel(true);
+        setTimeout(() => {
+            setOpenModal(false);
+        }, 1000);
     };
     const onSubmit = (event) => {
+        setDispel(true);
         event.preventDefault(); // para que no se recarge la pagina
-        addToDo(newToDoValue);
-        setOpenModal(false);
+        setTimeout(() => {
+            addToDo(newToDoValue);
+            setOpenModal(false);
+        }, 1000);
     };
-
     return (
-        <form onSubmit={ onSubmit }>
+        <form onSubmit={ onSubmit } className={`${(!openModal || dispel) && "dispel"}`}>
             <label>Write a new ToDo</label>
             <textarea 
                 value={ newToDoValue }
