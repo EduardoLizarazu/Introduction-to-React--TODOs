@@ -78,6 +78,7 @@ function ToDoProvider(props) {
             setOpenModal,
 
             filterCompletedToDos,
+            toggleFilter
         }}>
             { props.children }
         </ToDoContext.Provider>

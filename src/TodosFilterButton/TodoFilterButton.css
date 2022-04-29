@@ -1,0 +1,29 @@
+.container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+button {
+    display: inline-block;
+    background: transparent;
+    outline: none;
+    border: none;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.icon-filter {
+    display: inline-block;
+    background-size: contain;
+    background-image: url("../Assets/filter.png");
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 25px;
+}
+.icon-filter--on {
+    opacity: .8;
+}
+.icon-filter--off {
+    opacity: .3;
+}
