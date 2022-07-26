@@ -1,8 +1,10 @@
 import React from "react";
+import { ToDoContext } from "../TodoContext";
 import './TodoItem.css'
 function TodoItem(props) {
+    const { deleteAction } = React.useContext(ToDoContext);
     return (
-        <li className="TodoItem">
+        <li className={`TodoItem ${!!deleteAction && "delete--action"}`}>
             <span 
                 className={ `Icon Icon-check ${props.completed && 'Icon-check--active'}`}
                 onClick={props.onComplete}

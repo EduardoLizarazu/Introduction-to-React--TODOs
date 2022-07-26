@@ -1,6 +1,6 @@
 @keyframes start {
   from {
-    transform: translateY(15px);
+    transform: translateY(10px);
     opacity: .3;
   } to {
     transform: translateY(0);
@@ -17,6 +17,20 @@
   box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.15);  
 
   animation-name: start;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+@keyframes end {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  } to {
+    transform: translateX(15px);
+    opacity: .3;
+  }
+}
+.delete--action {
+  animation-name: end;
   animation-duration: 1s;
   animation-iteration-count: 1;
 }

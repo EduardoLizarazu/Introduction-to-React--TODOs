@@ -16,6 +16,8 @@ function ToDoProvider(props) {
       
       const [toggleFilter, setToggleFilter] = React.useState(false);
       
+      const [deleteAction, setDeleteAction] = React.useState(false);
+
       const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
       const totalToDos = toDos.length;
       
@@ -56,10 +58,13 @@ function ToDoProvider(props) {
       };
     
       const deleteToDo = (text) => {
-        const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
-        const newToDo = [...toDos];
-        newToDo.splice(toDoIndex, 1);
-        saveToDos(newToDo);
+        setDeleteAction(prevState => !prevState);
+        setTimeout(() => {
+          const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
+          const newToDo = [...toDos];
+          newToDo.splice(toDoIndex, 1);
+          saveToDos(newToDo);
+        }, 1000);
       };
     
     return (
@@ -78,7 +83,9 @@ function ToDoProvider(props) {
             setOpenModal,
 
             filterCompletedToDos,
-            toggleFilter
+            toggleFilter,
+
+            deleteAction,
         }}>
             { props.children }
         </ToDoContext.Provider>
