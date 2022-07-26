@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import React from "react";
 import { TodoCounter } from "../TodoCounter";
 import { TodoItem } from "../TodoItem";
@@ -11,6 +10,7 @@ import { Modal } from "../Modal";
 import { ToDosError } from "../TodosError";
 import { ToDosLoading } from "../TodosLoading";
 import { EmptyToDos } from "../EmptyTodos";
+import { TodoHeader } from "../TodoHeader";
 
 function AppUI() {
 
@@ -22,12 +22,24 @@ function AppUI() {
         deleteToDo,
         openModal,
         setOpenModal,
+        totalToDos, 
+        completedToDos,
+        searchValue, 
+        setSearchValue,
      } = React.useContext(ToDoContext);
 
     return (
         <React.Fragment>
-            <TodoCounter />
-            <TodoSearch />
+            <TodoHeader>
+                <TodoCounter 
+                    totalToDos={totalToDos}
+                    completedToDos={completedToDos}
+                />
+                <TodoSearch
+                    searchValue={searchValue}
+                    setSearchValue={setSearchValue}
+                />
+            </TodoHeader>
                 
             <TodoList>
                 { error && <ToDosError error={error}/> }
