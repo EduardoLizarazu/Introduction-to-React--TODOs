@@ -30,14 +30,17 @@ function App() {
   
   return (
     <React.Fragment>
-        <TodoHeader>
+        {/* React.cloneElement and React.Children */}
+        <TodoHeader loading={loading}>
             <TodoCounter 
                 totalToDos={totalToDos}
                 completedToDos={completedToDos}
-            />
+                // loading={loading}
+                />
             <TodoSearch
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
+                // loading={loading}
             />
         </TodoHeader>
 
