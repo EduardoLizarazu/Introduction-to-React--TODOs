@@ -40,8 +40,25 @@ function App() {
                 setSearchValue={setSearchValue}
             />
         </TodoHeader>
-            
-        <TodoList>
+
+         {/*Render Props  */}
+        <TodoList
+            error={error}
+            loading={loading}
+            searchedToDos={searchedToDos}
+            onError={() => <ToDosError />}
+            onLoading={() => <ToDosLoading />}
+            onEmptyTodos={() => <EmptyToDos />}
+            render={toDo => (<TodoItem 
+                key={toDo.text} 
+                text={toDo.text}
+                completed={toDo.completed} 
+                onComplete={ () => completeToDo(toDo.text)}
+                onDelete={ () => deleteToDo(toDo.text)}
+            />)}
+        />
+        
+        {/* <TodoList>
             { error && <ToDosError error={error}/> }
             { loading && <ToDosLoading /> }
             { (!loading && !searchedToDos.length) && <EmptyToDos /> }
@@ -54,7 +71,7 @@ function App() {
                 onDelete={ () => deleteToDo(toDo.text)}
             />
             )) }
-        </TodoList>
+        </TodoList> */}
         
         { !!openModal && (
             <Modal>
