@@ -46,18 +46,30 @@ function App() {
             error={error}
             loading={loading}
             searchedToDos={searchedToDos}
+            totalToDos={totalToDos}
+            searchText={searchValue}
             onError={() => <ToDosError />}
             onLoading={() => <ToDosLoading />}
             onEmptyTodos={() => <EmptyToDos />}
-            render={toDo => (<TodoItem 
+            onEmptySearchResults={
+                (searchText) => <p>There are no results for {searchText} </p>
+            }
+            // render={toDo => (<TodoItem 
+            //     key={toDo.text} 
+            //     text={toDo.text}
+            //     completed={toDo.completed} 
+            //     onComplete={ () => completeToDo(toDo.text)}
+            //     onDelete={ () => deleteToDo(toDo.text)}
+            // />)}
+        >
+            {toDo => (<TodoItem 
                 key={toDo.text} 
                 text={toDo.text}
                 completed={toDo.completed} 
                 onComplete={ () => completeToDo(toDo.text)}
                 onDelete={ () => deleteToDo(toDo.text)}
             />)}
-        />
-        
+        </TodoList> 
         {/* <TodoList>
             { error && <ToDosError error={error}/> }
             { loading && <ToDosLoading /> }
