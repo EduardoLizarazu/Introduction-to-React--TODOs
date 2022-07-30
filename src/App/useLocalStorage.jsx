@@ -25,7 +25,9 @@ function useLocalStorage(itemName, initialValue) {
           setError(error);
         }
       }, 1000);
-    });
+      // NO hacemos caso a la advertencia,
+      // [item, setItem] no importa si se modifican, solo vamos a renderizar 1 vez
+    }, []);
   
     const saveItem = (newItem) => {
       try {
