@@ -11,7 +11,8 @@ import { ToDosError } from "../TodosError";
 import { ToDosLoading } from "../TodosLoading";
 import { EmptyToDos } from "../EmptyTodos";
 import { TodoHeader } from "../TodoHeader";
-import { ChangeAlertWithStorageListener } from "../ChangeAlert";
+// import { ChangeAlertWithStorageListener } from "../ChangeAlert";
+import { ChangeAlert } from "../ChangeAlert";
 
 function App() {  
   const { 
@@ -104,7 +105,11 @@ function App() {
         />
 
         {/* HOC */}
-        <ChangeAlertWithStorageListener
+        {/* <ChangeAlertWithStorageListener
+            synchronize={synchronizeTodos}
+        /> */}
+        {/* React Hook */}
+        <ChangeAlert
             synchronize={synchronizeTodos}
         />
     </React.Fragment>
