@@ -2,6 +2,7 @@ import React from "react";
 
 function useLocalStorage(itemName, initialValue) {
 
+    const [synchronized, setSynchronized] = React.useState(true);
     const [error, setError] = React.useState(false);
     const [loading, setLoading] = React.useState(true);
     const [item, setItem] = React.useState(initialValue);
@@ -21,13 +22,15 @@ function useLocalStorage(itemName, initialValue) {
   
           setItem(parsedItem);
           setLoading(false);
+          setSynchronized(true); // Estado original
         } catch (error) {
           setError(error);
         }
       }, 1000);
       // NO hacemos caso a la advertencia,
       // [item, setItem] no importa si se modifican, solo vamos a renderizar 1 vez
-    }, []);
+      // queremos que carge cuando haya un cambio en el estado synchronized
+    }, [synchronized]);
   
     const saveItem = (newItem) => {
       try {
@@ -38,12 +41,18 @@ function useLocalStorage(itemName, initialValue) {
         setError(error);
       }
     };
-  
+    
+    const synchronizeItem = () => {
+       setLoading(true);
+       setSynchronized(false);
+    };
+
     return {
       item,
       saveItem,
       loading,
-      error
+      error,
+      synchronizeItem
     }
     
 }
