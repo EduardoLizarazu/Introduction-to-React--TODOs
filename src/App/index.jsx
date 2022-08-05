@@ -76,20 +76,6 @@ function App() {
                 onDelete={ () => deleteToDo(toDo.text)}
             />)}
         </TodoList> 
-        {/* <TodoList>
-            { error && <ToDosError error={error}/> }
-            { loading && <ToDosLoading /> }
-            { (!loading && !searchedToDos.length) && <EmptyToDos /> }
-            { searchedToDos.map(toDo => (
-            <TodoItem 
-                key={toDo.text} 
-                text={toDo.text}
-                completed={toDo.completed} 
-                onComplete={ () => completeToDo(toDo.text)}
-                onDelete={ () => deleteToDo(toDo.text)}
-            />
-            )) }
-        </TodoList> */}
         
         { !!openModal && (
             <Modal>
@@ -103,12 +89,7 @@ function App() {
         <CreateTodoButton 
             setOpenModal={ setOpenModal }
         />
-
-        {/* HOC */}
-        {/* <ChangeAlertWithStorageListener
-            synchronize={synchronizeTodos}
-        /> */}
-        {/* React Hook */}
+        
         <ChangeAlert
             synchronize={synchronizeTodos}
         />
