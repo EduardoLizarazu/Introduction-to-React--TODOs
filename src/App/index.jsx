@@ -15,22 +15,26 @@ import { TodoHeader } from "../TodoHeader";
 import { ChangeAlert } from "../ChangeAlert";
 
 function App() {  
-  const { 
-    error,
-    loading,
-    searchedToDos,
-    completeToDo,
-    deleteToDo,
-    openModal,
-    setOpenModal,
-    totalToDos, 
-    completedToDos,
-    searchValue, 
-    setSearchValue,
-    addToDo,
-    synchronizeTodos
-  } = useTodos();
+  const { states, stateUpdaters } = useTodos();
   
+  const {
+    loading,
+    error,
+    totalToDos,
+    searchValue,
+    searchedToDos, 
+    completeToDo,
+    openModal,
+    completedToDos,
+  } = states;
+  const { 
+    addToDo,
+    setSearchValue,
+    setOpenModal,
+    deleteToDo,
+    synchronizeTodos
+   } = stateUpdaters;
+
   return (
     <React.Fragment>
         {/* React.cloneElement and React.Children */}
