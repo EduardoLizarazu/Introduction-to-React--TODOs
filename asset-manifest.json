@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Introduction-to-React--TODOs/static/css/main.03d8b0be.css",
+    "main.js": "/Introduction-to-React--TODOs/static/js/main.477f8eed.js",
+    "index.html": "/Introduction-to-React--TODOs/index.html",
+    "main.03d8b0be.css.map": "/Introduction-to-React--TODOs/static/css/main.03d8b0be.css.map",
+    "main.477f8eed.js.map": "/Introduction-to-React--TODOs/static/js/main.477f8eed.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.03d8b0be.css",
+    "static/js/main.477f8eed.js"
+  ]
+}
